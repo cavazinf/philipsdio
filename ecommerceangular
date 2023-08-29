@@ -1,0 +1,51 @@
+Crie um novo componente para a lista de produtos usando o Angular CLI:
+bash
+Copy code
+ng generate component product-list
+No arquivo product-list.component.html, você pode criar uma lista de produtos básica:
+html
+Copy code
+<div *ngFor="let product of products">
+  <h2>{{ product.name }}</h2>
+  <p>Preço: {{ product.price }}</p>
+  <button (click)="addToCart(product)">Adicionar ao Carrinho</button>
+</div>
+No arquivo product-list.component.ts, você pode definir a lógica para buscar produtos de uma API (simulada) e adicionar produtos ao carrinho:
+typescript
+Copy code
+import { Component, OnInit } from '@angular/core';
+
+interface Product {
+  name: string;
+  price: number;
+}
+
+@Component({
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.css']
+})
+export class ProductListComponent implements OnInit {
+  products: Product[] = [];
+
+  ngOnInit(): void {
+    // Simulação de chamada a uma API para buscar produtos
+    this.getProducts();
+  }
+
+  getProducts(): void {
+    // Aqui você pode fazer uma chamada HTTP real para uma API de produtos
+    // Mas, neste exemplo, vamos simular alguns produtos
+    this.products = [
+      { name: 'Produto 1', price: 19.99 },
+      { name: 'Produto 2', price: 29.99 },
+      { name: 'Produto 3', price: 9.99 }
+    ];
+  }
+
+  addToCart(product: Product): void {
+    // Adicionar o produto ao carrinho (lógica pode ser implementada aqui)
+    console.log('Produto adicionado ao carrinho:', product.name);
+  }
+}
+Lembre-se de adicionar roteamento para sua página de lista de produtos em app-routing.module.ts e criar um link no cabeçalho ou menu para navegar até a página de produtos.
